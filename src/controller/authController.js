@@ -2,6 +2,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { authRequired } from "../middleware/validateToken.js";
+import { createAccesToken } from "../libs/jwt.js";
 
 
 
@@ -9,7 +10,7 @@ export const register = async (req, res) => {
     const { email, password, username } = req.body;
   try {
     const userFound = await User.findOne({email})
-    if(userFound) return res.status(400).json({message:'The user already exist'})
+    if(userFound) return res.status(400).json(['The email is already in use'])
 
 const passHash = await bcrypt.hash(password, 10)
 

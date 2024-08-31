@@ -5,9 +5,12 @@ import typeRoutes from "./routes/type.poke.routes.js";
 import regionRoute from "./routes/region.routes.js"
 import pokemonRoute from "./routes/pokemon.routes.js"
 import cookieParser from "cookie-parser";
+import cors from "cors";
 const app = express()
 
-
+app.use(cors({
+    origin:'http://localhost:5173'
+}))
 app.use(express.json())
 app.use(cookieParser())
 app.use(morgan('dev'))
